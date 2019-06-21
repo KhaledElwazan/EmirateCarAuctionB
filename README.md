@@ -20,5 +20,5 @@ Project is created with:
 
 
 ##Screenshots and Showcase
-![Main Screen](Screenshots/1.jpeg)
+![Main Screen](Screenshots/1.png)
 
