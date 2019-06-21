@@ -19,6 +19,6 @@ Project is created with:
 * Room
 
 
-##S creenshots and Showcase
+## Screenshots and Showcase
 ![Main Screen](Screenshots/1.png)
 
