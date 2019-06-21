@@ -1,8 +1,8 @@
-#Emirates Car Auction
+# Emirates Car Auction
 The purpose of this project id to display the items of an online auction (Emirates Auction) displaying cars for sale.
 
 
-##Available Functions
+## Available Functions
 
 * Sort items by year of item production, item's price or even with the end date of the item in the auction.
 * Filter the items according to specific criterion (In-progress). 
@@ -10,7 +10,7 @@ The purpose of this project id to display the items of an online auction (Emirat
 * Change number of displayed items for convenience (In-progress).
 
 
-##Technologies:
+## Technologies:
 
 Project is created with:
 * Glide
@@ -19,6 +19,6 @@ Project is created with:
 * Room
 
 
-##Screenshots and Showcase
+##S creenshots and Showcase
 ![Main Screen](Screenshots/1.png)
 
