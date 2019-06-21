@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
 
     @BindView(R.id.dataViewer)
-    RecyclerView dataViewer;
+    GridView dataViewer;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadData();
 
-        dataViewer.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -91,66 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
 
-                    DataAdapter adapter = new DataAdapter();
+                    CarAdapter adapter = new CarAdapter(context);
                     List<Car> cars = response.body().getCars();
                     //    adapter.setCars(cars);
 
 
-                    //download car posters
-
-                    new AsyncTask<List<Car>, Void, List<Bitmap>>() {
-
-                        private ProgressDialog dialog;
-
-                        @Override
-                        protected void onPreExecute() {
-                            //      dialog = ProgressDialog.show(context, "Loading", "Wait while loading...");
-                        }
-
-                        @Override
-                        protected List<Bitmap> doInBackground(List<Car>... lists) {
-
-                            List<Bitmap> posters = new ArrayList<>();
-                            int width = Integer.parseInt(getString(R.string.width)), height = Integer.parseInt(getString(R.string.height));
+                    adapter.setCars(cars);
+                    dataViewer.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
 
-                            for (int i = 0; i < 3; i++) {
-
-                                Car car = lists[0].get(i);
-
-                                String imageURL = car.getImage();
-                                imageURL = imageURL.replace("[w]", "0");
-                                imageURL = imageURL.replace("[h]", "0");
-                                try {
-                                    InputStream inputStream = new URL(imageURL).openStream();
-                                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                                    inputStream.close();
-                                    posters.add(bitmap);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-
-                            return posters;
-                        }
-
-                        @Override
-                        protected void onPostExecute(List<Bitmap> bitmaps) {
-
-//                            if (dialog.isShowing()) {
-//                                dialog.dismiss();
-//                                dialog.cancel();
-//                            }
-
-                            //System.out.println("done!");
-                            adapter.setPosters(bitmaps);
-                            adapter.setCars(cars);
-                            dataViewer.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-
-                        }
-                    }.execute(cars);
 
 
                 }

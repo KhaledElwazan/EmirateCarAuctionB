@@ -4,124 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Card">
+    tools:context=".fragments.Card" >
+
+
+    <!--android:background="@drawable/shapes"-->
 
 
     <ImageView
         android:id="@+id/carPoster"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_width="157dp"
+        android:layout_height="112dp"
+android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/carName"
-        android:layout_width="113dp"
-        android:layout_height="39dp"
+    <LinearLayout
+        android:layout_width="211dp"
+        android:layout_height="114dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginRight="106dp"
-        android:text="Car Model"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carPoster"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/carPrice"
-        android:layout_width="85dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginRight="157dp"
-        android:text="Car Price"
-        android:textColor="@android:color/holo_green_light"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/carPoster"
-        app:layout_constraintTop_toBottomOf="@+id/carName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-        />
+        <TextView
+            android:id="@+id/carName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Model"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/carPoster"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/carPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Price"
+            android:textColor="@android:color/holo_green_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/carPoster"
+            app:layout_constraintTop_toBottomOf="@+id/carName"
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/carPoster"
-        app:layout_constraintTop_toBottomOf="@+id/carPrice"
-
-        >
-
-        <TableRow
-
-
-            >
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lot#" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bids" />
+            />
 
 
-            <TextView
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/carPoster"
+            app:layout_constraintTop_toBottomOf="@+id/carPrice">
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time Lift" />
-
-        </TableRow>
-
-
-        <TableRow
-
-
-            >
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lot#"
-                android:id="@+id/lotNum"/>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bids"
-                android:id="@+id/bids"
-                />
+            <TableRow
 
 
-            <TextView
+                >
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time Lift"
-                android:id="@+id/timeLift"
+                <TextView
 
-                />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Lot#" />
 
-        </TableRow>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Bids" />
 
 
-    </TableLayout>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Time Lift" />
+
+            </TableRow>
+
+
+            <TableRow
+
+
+                >
+
+                <TextView
+
+                    android:id="@+id/lotNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Lot#" />
+
+                <TextView
+
+                    android:id="@+id/bids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Bids" />
+
+
+                <TextView
+
+                    android:id="@+id/timeLift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:text="Time Lift"
+
+                    />
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
