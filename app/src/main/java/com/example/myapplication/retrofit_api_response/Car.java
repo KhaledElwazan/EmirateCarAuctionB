@@ -2,11 +2,11 @@
 package com.example.myapplication.retrofit_api_response;
 
 import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Car implements Serializable
-{
+public class Car implements Serializable, Comparable<Car> {
     @Override
     public String toString() {
         return "Car{" +
@@ -97,13 +97,11 @@ public class Car implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Car() {
     }
 
     /**
-     * 
      * @param sharingLink
      * @param mileage
      * @param sharingMsgEn
@@ -309,4 +307,9 @@ public class Car implements Serializable
         this.auctionInfo = auctionInfo;
     }
 
+
+    @Override
+    public int compareTo(Car car) {
+        return this.getAuctionInfo().getCurrentPrice() - car.getAuctionInfo().getCurrentPrice();
+    }
 }

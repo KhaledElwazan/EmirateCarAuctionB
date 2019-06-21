@@ -32,7 +32,10 @@
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
-        android:numColumns="1" />
+        android:numColumns="1"
+
+
+        />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

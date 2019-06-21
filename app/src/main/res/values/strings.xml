@@ -9,5 +9,8 @@
 
     <string name="width">200</string>
     <string name="height">100</string>
+    <string name="end_date">End Date</string>
+    <string name="price">Price</string>
+    <string name="year">Year</string>
 
 </resources>

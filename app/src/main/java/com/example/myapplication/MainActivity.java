@@ -1,11 +1,20 @@
 package com.example.myapplication;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.PopupMenu;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myapplication.retrofit_api_response.Car;
 import com.example.myapplication.retrofit_api_response.Cars;
@@ -13,21 +22,8 @@ import com.example.myapplication.retrofit_api_response.GetDataService;
 import com.example.myapplication.retrofit_api_response.RetrofitClientInstance;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.GridView;
-import android.widget.TextView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +31,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,18 +52,53 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_home:
-//                    mTextMessage.setText(R.string.title_home);
-//                    return true;
-//                case R.id.navigation_dashboard:
-//                    mTextMessage.setText(R.string.title_dashboard);
-//                    return true;
-//                case R.id.navigation_notifications:
-//                    mTextMessage.setText(R.string.title_notifications);
-//                    return true;
-//            }
-            return true;
+            switch (item.getItemId()) {
+                case R.id.filter:
+
+
+                    return true;
+                case R.id.sort:
+
+
+                    PopupMenu popup = new PopupMenu(MainActivity.this, findViewById(R.id.sort));
+                    MenuInflater inflater = popup.getMenuInflater();
+                    inflater.inflate(R.menu.popup_sort, popup.getMenu());
+                    popup.show();
+                    popup.setOnMenuItemClickListener(menuItem -> {
+
+
+                        switch (menuItem.getItemId()) {
+
+                            case R.id.endDate:
+
+                                loadData(true, 0);
+
+                                break;
+
+                            case R.id.price:
+                                loadData(true, 1);
+
+
+                                break;
+
+                            case R.id.year:
+
+                                loadData(true, 2);
+                                break;
+
+
+                        }
+
+
+                        return true;
+                    });
+                    return true;
+                case R.id.gridView:
+
+
+                    return true;
+            }
+            return false;
         }
     };
 
@@ -80,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         context = this;
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        loadData();
+        loadData(false, -1);
 
 
         swipe.setOnRefreshListener(() -> {
-            loadData();
+            loadData(false, -1);
             if (swipe.isRefreshing()) swipe.setRefreshing(false);
 
 
@@ -94,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void loadData() {
+    public void loadData(boolean toBeSorted, int sortingCriterion) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(getString(R.string.BASE_URL)).create(GetDataService.class);
         Call<Cars> call = service.getCars();
 
         call.enqueue(new Callback<Cars>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<Cars> call, Response<Cars> response) {
 
@@ -106,9 +137,27 @@ public class MainActivity extends AppCompatActivity {
 
                     CarAdapter adapter = new CarAdapter(context);
                     List<Car> cars = response.body().getCars();
-                    //    adapter.setCars(cars);
+
+                    if (toBeSorted) {
+                        switch (sortingCriterion) {
+                            case 0:
+
+                                Collections.sort(cars, (t1, t2) -> t1.getAuctionInfo().getEndDate() - t2.getAuctionInfo().getEndDate());
 
 
+                                break;
+                            case 1:
+
+                                Collections.sort(cars, (t1, t2) -> t1.getAuctionInfo().getCurrentPrice() - t2.getAuctionInfo().getCurrentPrice());
+
+                                break;
+                            case 2:
+                                Collections.sort(cars, (t1, t2) -> t1.getYear() - t2.getYear());
+
+                                break;
+
+                        }
+                    }
                     adapter.setCars(cars);
                     dataViewer.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
@@ -121,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Cars> call, Throwable t) {
-                Log.e("API response", t.toString());
+                Log.e("Retrofit", t.toString());
             }
         });
 

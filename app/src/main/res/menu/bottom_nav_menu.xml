@@ -2,17 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/filter"
         android:icon="@drawable/filter"
         android:title="@string/title_filter" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/sort"
         android:icon="@drawable/sort"
-        android:title="@string/title_sort" />
+        android:title="@string/title_sort" >
+
+
+
+    </item>
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/gridView"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_view" />
 
