@@ -106,8 +106,6 @@ public class CarAdapter extends BaseAdapter {
 
             Glide.with(this.context).load(link).into(carPoster);
 
-            //    carPoster.setImageBitmap(posters.get(position));
-
             carName.setText(car.getModelEn());
 
             carPrice.setText(car.getAuctionInfo().getCurrentPrice().toString());

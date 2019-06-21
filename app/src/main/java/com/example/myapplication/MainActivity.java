@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.MenuItem;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.dataViewer)
     GridView dataViewer;
+
+    @BindView(R.id.swipeToRefresh)
+    SwipeRefreshLayout swipe;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
 
+        swipe.setOnRefreshListener(() -> {
+            loadData();
+            if (swipe.isRefreshing()) swipe.setRefreshing(false);
+
+
+        });
+
+
     }
 
 
@@ -99,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
                     adapter.setCars(cars);
                     dataViewer.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
-
 
 
                 }
