@@ -1,11 +1,9 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -23,7 +21,6 @@ import com.example.myapplication.retrofit_api_response.RetrofitClientInstance;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.swipeToRefresh)
     SwipeRefreshLayout swipe;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -95,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.gridView:
 
+
+                    if (dataViewer.getNumColumns() == 1) {
+                        dataViewer.setNumColumns(2);
+                    } else {
+                        dataViewer.setNumColumns(1);
+                    }
 
                     return true;
             }

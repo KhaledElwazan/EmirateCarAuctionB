@@ -7,7 +7,7 @@ The purpose of this project id to display the items of an online auction (Emirat
 * Sort items by year of item production, item's price or even with the end date of the item in the auction.
 * Filter the items according to specific criterion (In-progress). 
 * Adding certain items as favorite items (In-progress).
-* Change number of displayed items for convenience (In-progress).
+* Change number of displayed items for convenience.
 
 
 ##Technologies:

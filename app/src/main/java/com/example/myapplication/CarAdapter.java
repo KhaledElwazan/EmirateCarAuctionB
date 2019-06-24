@@ -2,9 +2,6 @@ package com.example.myapplication;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.example.myapplication.retrofit_api_response.Car;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -80,6 +75,18 @@ public class CarAdapter extends BaseAdapter {
         return 0;
     }
 
+    private static int[] splitToComponentTimes(int biggy) {
+        long longVal = biggy;
+        int hours = (int) longVal / 3600;
+        int remainder = (int) longVal - hours * 3600;
+        int mins = remainder / 60;
+        remainder = remainder - mins * 60;
+        int secs = remainder;
+
+        int[] ints = {hours, mins, secs};
+        return ints;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -95,8 +102,7 @@ public class CarAdapter extends BaseAdapter {
 
         Car car = cars.get(position);
 
-        if (cars.size() != 0 ) {
-
+        if (cars.size() != 0) {
 
 
             String link = car.getImage();
@@ -114,7 +120,12 @@ public class CarAdapter extends BaseAdapter {
 
             lotNum.setText(car.getAuctionInfo().getLot().toString());
 
-            timeLift.setText(car.getAuctionInfo().getEndDate().toString());
+            int[] ints = splitToComponentTimes(car.getAuctionInfo().getEndDate());
+
+            String time = ints[0] + ":" + ints[1] + ":" + ints[2];
+
+
+            timeLift.setText(time);
 
         }
 
