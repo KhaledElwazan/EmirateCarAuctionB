@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.db.CarDB;
 import com.example.myapplication.retrofit_api_response.Car;
 
 import java.util.List;
@@ -40,6 +41,12 @@ public class CarAdapter extends BaseAdapter {
     ImageView carPoster;
 
 
+    @BindView(R.id.fav)
+    ImageView favorite;
+
+
+    private CarDB carDB;
+
     private List<Car> cars;
     private Context context;
 
@@ -50,6 +57,7 @@ public class CarAdapter extends BaseAdapter {
 
     public CarAdapter(Context context) {
         this.context = context;
+        carDB = CarDB.getInstance(context);
 
     }
 
@@ -90,7 +98,7 @@ public class CarAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final Car movie = cars.get(position);
+        final Car car = cars.get(position);
 
         if (convertView == null) {
             LayoutInflater from = LayoutInflater.from(context);
@@ -99,10 +107,28 @@ public class CarAdapter extends BaseAdapter {
 
         ButterKnife.bind(this, convertView);
 
+// TODO: fix the favorite icon on click to be changed
+        favorite.setOnClickListener(view -> {
+            System.out.println(position);
+            if (carDB.getCarDBDao().getCar(car.getCarID()) != null) {
+                favorite.setImageResource(R.drawable.heart_hollow);
+                carDB.getCarDBDao().delete(cars.get(position));
+                System.out.println("removed!");
 
-        Car car = cars.get(position);
+            } else {
+                favorite.setImageResource(R.drawable.heart_full);
+
+                carDB.getCarDBDao().insert(car);
+            }
+        });
+
 
         if (cars.size() != 0) {
+
+            if (carDB.getCarDBDao().getCar(car.getCarID()) != null)
+                favorite.setImageResource(R.drawable.heart_full);
+            else
+                favorite.setImageResource(R.drawable.heart_hollow);
 
 
             String link = car.getImage();

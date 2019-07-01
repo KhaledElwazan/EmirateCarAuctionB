@@ -1,9 +1,10 @@
 
 package com.example.myapplication.retrofit_api_response;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 public class AuctionInfo implements Serializable
 {
@@ -231,5 +232,29 @@ public class AuctionInfo implements Serializable
     public void setIVinNumber(String iVinNumber) {
         this.iVinNumber = iVinNumber;
     }
+
+    @Override
+    public String toString() {
+        return "AuctionInfo{" +
+                "bids=" + bids +
+                ", endDate=" + endDate +
+                ", endDateEn='" + endDateEn + '\'' +
+                ", endDateAr='" + endDateAr + '\'' +
+                ", currencyEn='" + currencyEn + '\'' +
+                ", currencyAr='" + currencyAr + '\'' +
+                ", currentPrice=" + currentPrice +
+                ", minIncrement=" + minIncrement +
+                ", lot=" + lot +
+                ", priority=" + priority +
+                ", vATPercent=" + vATPercent +
+                ", itemAuctionType=" + itemAuctionType +
+                ", isModified=" + isModified +
+                ", itemid=" + itemid +
+                ", iCarId=" + iCarId +
+                ", iVinNumber='" + iVinNumber + '\'' +
+                '}';
+    }
+
+
 
 }

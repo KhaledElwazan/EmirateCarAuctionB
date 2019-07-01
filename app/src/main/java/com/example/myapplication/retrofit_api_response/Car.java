@@ -1,11 +1,23 @@
 
 package com.example.myapplication.retrofit_api_response;
 
-import java.io.Serializable;
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+
+@Entity
 public class Car implements Serializable, Comparable<Car> {
     @Override
     public String toString() {
@@ -33,67 +45,122 @@ public class Car implements Serializable, Comparable<Car> {
                 '}';
     }
 
+    @ColumnInfo(name = "carID")
     @SerializedName("carID")
     @Expose
+    @PrimaryKey
+    @NonNull
     private Integer carID;
+    @ColumnInfo(name = "image")
     @SerializedName("image")
     @Expose
     private String image;
     @SerializedName("descriptionAr")
     @Expose
+    @ColumnInfo(name = "descriptionAr")
     private String descriptionAr;
+    @ColumnInfo(name = "descriptionEn")
     @SerializedName("descriptionEn")
     @Expose
     private String descriptionEn;
+    @ColumnInfo(name = "imgCount")
     @SerializedName("imgCount")
     @Expose
     private Integer imgCount;
     @SerializedName("sharingLink")
+    @ColumnInfo(name = "sharingLink")
     @Expose
     private String sharingLink;
     @SerializedName("sharingMsgEn")
+    @ColumnInfo(name = "sharingMsgEn")
     @Expose
     private String sharingMsgEn;
     @SerializedName("sharingMsgAr")
+    @ColumnInfo(name = "sharingMsgAr")
     @Expose
     private String sharingMsgAr;
     @SerializedName("mileage")
+    @ColumnInfo(name = "mileage")
     @Expose
     private String mileage;
     @SerializedName("makeID")
+    @ColumnInfo(name = "makeID")
     @Expose
     private Integer makeID;
     @SerializedName("modelID")
+    @ColumnInfo(name = "modelID")
     @Expose
     private Integer modelID;
     @SerializedName("bodyId")
+    @ColumnInfo(name = "bodyId")
     @Expose
     private Integer bodyId;
     @SerializedName("year")
+    @ColumnInfo(name = "year")
     @Expose
     private Integer year;
     @SerializedName("makeEn")
+    @ColumnInfo(name = "makeEn")
     @Expose
     private String makeEn;
     @SerializedName("makeAr")
+    @ColumnInfo(name = "makeAr")
     @Expose
     private String makeAr;
     @SerializedName("modelEn")
+    @ColumnInfo(name = "modelEn")
     @Expose
     private String modelEn;
     @SerializedName("modelAr")
     @Expose
     private String modelAr;
+    @ColumnInfo(name = "bodyEn")
     @SerializedName("bodyEn")
     @Expose
     private String bodyEn;
     @SerializedName("bodyAr")
+    @ColumnInfo(name = "bodyAr")
     @Expose
     private String bodyAr;
+    @ColumnInfo(name = "AuctionInfo")
     @SerializedName("AuctionInfo")
     @Expose
+    @TypeConverters({DataConverter.class})
     private AuctionInfo auctionInfo;
     private final static long serialVersionUID = 4070382264665154877L;
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return carID.equals(car.carID) &&
+                Objects.equals(image, car.image) &&
+                Objects.equals(descriptionAr, car.descriptionAr) &&
+                Objects.equals(descriptionEn, car.descriptionEn) &&
+                Objects.equals(imgCount, car.imgCount) &&
+                Objects.equals(sharingLink, car.sharingLink) &&
+                Objects.equals(sharingMsgEn, car.sharingMsgEn) &&
+                Objects.equals(sharingMsgAr, car.sharingMsgAr) &&
+                Objects.equals(mileage, car.mileage) &&
+                Objects.equals(makeID, car.makeID) &&
+                Objects.equals(modelID, car.modelID) &&
+                Objects.equals(bodyId, car.bodyId) &&
+                Objects.equals(year, car.year) &&
+                Objects.equals(makeEn, car.makeEn) &&
+                Objects.equals(makeAr, car.makeAr) &&
+                Objects.equals(modelEn, car.modelEn) &&
+                Objects.equals(modelAr, car.modelAr) &&
+                Objects.equals(bodyEn, car.bodyEn) &&
+                Objects.equals(bodyAr, car.bodyAr) &&
+                Objects.equals(auctionInfo, car.auctionInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(carID, image, descriptionAr, descriptionEn, imgCount, sharingLink, sharingMsgEn, sharingMsgAr, mileage, makeID, modelID, bodyId, year, makeEn, makeAr, modelEn, modelAr, bodyEn, bodyAr, auctionInfo);
+    }
 
     /**
      * No args constructor for use in serialization

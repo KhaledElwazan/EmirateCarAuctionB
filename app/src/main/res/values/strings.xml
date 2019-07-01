@@ -3,6 +3,7 @@
     <string name="title_filter">Filter</string>
     <string name="title_sort">Sort</string>
     <string name="title_view">Grid View</string>
+    <string name="title_fav">Favorite</string>
 
     <string name="BASE_URL">http://api.emiratesauction.com/v2/</string>
 

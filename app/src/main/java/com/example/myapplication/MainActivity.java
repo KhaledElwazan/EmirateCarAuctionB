@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     return true;
+
+
+                case R.id.fav:
+
+                    Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
+                    startActivity(intent);
+
+                    return true;
+
             }
             return false;
         }
